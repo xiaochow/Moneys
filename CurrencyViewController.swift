@@ -61,8 +61,7 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate{
         let text1 = nameTextField.text ?? ""
         let text2 = countryTextField.text ?? ""
         let text3 = rateTextField.text ?? ""
-        
-        saveButton.isEnabled = !text1.isEmpty || !text2.isEmpty || !text3.isEmpty
+        saveButton.isEnabled = !text1.isEmpty || !text2.isEmpty || !text3.isEmpty || Double(text3) != 0
     }
     
     // Call this function when the tap is recognized.
@@ -88,7 +87,7 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate{
                 let name = nameTextField.text ?? ""
                 let country = countryTextField.text ?? ""
                 let rateString = rateTextField.text ?? ""
-                let rate = Double(rateString) ?? 0.00
+                let rate = Double(rateString) ?? 1.00
                 
                 // Set the currency to be passed to CurrencyTableViewController after the unwind segue.
                 currency = Currency(name: name, country: country, rate: rate)
