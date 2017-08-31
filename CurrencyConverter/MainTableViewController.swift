@@ -46,52 +46,11 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
         amountTextField.text = ""
      
         amountTextField.delegate = self
-        self.fetchOnlineData()
         self.saveCurrencies()
         
         // Set up the two selected currencies
         settingUp()
         
-    }
-    
-    // Update the rates from online resource.
-    func fetchOnlineData() {
-    
-        let url = NSURL(string:"http://api.fixer.io/latest?base=USD")!
-        let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {(data, response, error) in
-           
-            let dataStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)! as String
-            
-            if let json = self.jsonToDict(dataStr) {
-                                
-                let rates = json["rates"]!
-                
-                self.currencies[1].rate = rates["CNY"] as! Double
-                self.currencies[2].rate = rates["EUR"] as! Double
-                self.currencies[3].rate = rates["JPY"] as! Double
-                self.currencies[4].rate = rates["CAD"] as! Double
-                self.currencies[5].rate = rates["KRW"] as! Double
-                self.currencies[6].rate = rates["BRL"] as! Double
-                
-                self.saveCurrencies()
-            }
-        })
-        
-        task.resume()
-        
-    }
-    
-    // JSON to Dictionary.
-    func jsonToDict(_ text: String) -> [String:AnyObject]? {
-        
-        if let data = text.data(using: String.Encoding.utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
-            } catch _ as NSError {
-                print("Failed to create dictionary for JSON.")
-            }
-        }
-        return nil
     }
 
     // To load sample currencies.

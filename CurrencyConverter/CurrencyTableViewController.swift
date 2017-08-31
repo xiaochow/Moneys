@@ -12,6 +12,7 @@ class CurrencyTableViewController: UITableViewController {
     
     // MARK: Properties
     var currencies = [Currency]()
+    var refresher: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,62 @@ class CurrencyTableViewController: UITableViewController {
 
         // Activate the edit button provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        // Set up the refresher.
+        self.refresher = UIRefreshControl()
+        self.tableView.addSubview(refresher)
+        self.refresher.tintColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 0.7)
+        let attributes = [NSForegroundColorAttributeName : UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 0.7)] as [String: Any]
+        self.refresher.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: attributes)
+        self.refresher.addTarget(self, action: #selector(fetchOnlineData), for: .valueChanged)
+    }
+    
+    func fetchOnlineData() {
+        
+        let url = NSURL(string:"http://api.fixer.io/latest?base=USD")!
+        let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {(data, response, error) in
+            
+            if let sourceData = data {
+                
+                let dataStr = NSString(data: sourceData, encoding: String.Encoding.utf8.rawValue)! as String
+                
+                if let json = self.jsonToDict(dataStr) {
+                    
+                    let rates = json["rates"]!
+                    
+                    self.currencies[1].rate = rates["CNY"] as! Double
+                    self.currencies[2].rate = rates["EUR"] as! Double
+                    self.currencies[3].rate = rates["JPY"] as! Double
+                    self.currencies[4].rate = rates["CAD"] as! Double
+                    self.currencies[5].rate = rates["KRW"] as! Double
+                    self.currencies[6].rate = rates["BRL"] as! Double
+                    
+                    self.saveCurrencies()
+                }
+            }
+            else {
+               // No Internet connection alert.
+            }
+        })
+                
+        task.resume()
+        
+        self.tableView.reloadData()
+        self.refresher.endRefreshing()
+
+    }
+    
+    // JSON to Dictionary.
+    func jsonToDict(_ text: String) -> [String:AnyObject]? {
+        
+        if let data = text.data(using: String.Encoding.utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
+            } catch _ as NSError {
+                print("Failed to create dictionary for JSON.")
+            }
+        }
+        return nil
     }
     
     override func didReceiveMemoryWarning() {
