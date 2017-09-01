@@ -27,8 +27,8 @@ class CurrencyTableViewController: UITableViewController {
         // Set up the refresher.
         self.refresher = UIRefreshControl()
         self.tableView.addSubview(refresher)
-        self.refresher.tintColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 0.7)
-        let attributes = [NSForegroundColorAttributeName : UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 0.7)] as [String: Any]
+        self.refresher.tintColor = UIColor.black
+        let attributes = [NSForegroundColorAttributeName : UIColor.black] as [String: Any]
         self.refresher.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: attributes)
         self.refresher.addTarget(self, action: #selector(fetchOnlineData), for: .valueChanged)
     }

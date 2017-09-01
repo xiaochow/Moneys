@@ -10,12 +10,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Pick The First Currency-->
+        <!--First Currency-->
         <scene sceneID="lTi-lc-tPE">
             <objects>
                 <tableViewController id="Qzo-qb-TK7" customClass="SelectionTableViewController" customModule="CurrencyConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="xyj-ZP-eIR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -53,7 +53,7 @@
                             <outlet property="delegate" destination="Qzo-qb-TK7" id="u7V-w0-DG1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pick The First Currency" id="JTu-N8-BWy">
+                    <navigationItem key="navigationItem" title="First Currency" id="JTu-N8-BWy">
                         <barButtonItem key="leftBarButtonItem" title="&lt;Back" id="JtW-s5-GqH">
                             <connections>
                                 <action selector="back:" destination="Qzo-qb-TK7" id="cVq-h7-peF"/>
@@ -95,7 +95,7 @@
             <objects>
                 <tableViewController id="0hJ-cr-SaA" customClass="MainTableViewController" customModule="CurrencyConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="300" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="40" sectionFooterHeight="2" id="P1n-f9-GVi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" axis="vertical" id="yUI-m6-sJf">
@@ -142,13 +142,23 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="20" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="laq-ai-bAT">
+                                        <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="20" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="laq-ai-bAT">
                                             <rect key="frame" x="30" y="0.0" width="50" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="CB6-v4-AmB"/>
                                                 <constraint firstAttribute="width" constant="50" id="HH0-K8-REf"/>
                                             </constraints>
-                                            <state key="normal" title="Swap"/>
+                                            <state key="normal">
+                                                <attributedString key="attributedTitle">
+                                                    <fragment content="Swap">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="Helvetica-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                            </state>
                                             <connections>
                                                 <action selector="swap:" destination="0hJ-cr-SaA" eventType="touchUpInside" id="dEp-2Y-vK7"/>
                                             </connections>
@@ -159,13 +169,22 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWg-HW-9s9">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tWg-HW-9s9">
                                             <rect key="frame" x="334" y="0.0" width="50" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="6IV-ng-aJU"/>
                                                 <constraint firstAttribute="height" constant="20" id="TnH-Zx-7EN"/>
                                             </constraints>
-                                            <state key="normal" title="Clear"/>
+                                            <state key="normal">
+                                                <attributedString key="attributedTitle">
+                                                    <fragment content="Clear">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="15" name="Helvetica-Bold"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                            </state>
                                             <connections>
                                                 <action selector="clear:" destination="0hJ-cr-SaA" eventType="touchUpInside" id="P4i-xx-m0S"/>
                                             </connections>
@@ -186,11 +205,11 @@
                         <sections>
                             <tableViewSection headerTitle="FROM" id="zIQ-nD-daJ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cWj-Kx-y5b" detailTextLabel="Olr-tD-gtj" style="IBUITableViewCellStyleSubtitle" id="ELa-jS-feS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cWj-Kx-y5b" detailTextLabel="Olr-tD-gtj" style="IBUITableViewCellStyleSubtitle" id="ELa-jS-feS">
                                         <rect key="frame" x="0.0" y="40" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ELa-jS-feS" id="oAz-ZB-vu9">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="20" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cWj-Kx-y5b">
@@ -217,11 +236,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="TO" footerTitle=" " id="0A6-Qn-Ysy">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="TOT-r1-CSi" detailTextLabel="sLA-Ja-nPY" style="IBUITableViewCellStyleSubtitle" id="4YS-l8-BWc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="TOT-r1-CSi" detailTextLabel="sLA-Ja-nPY" style="IBUITableViewCellStyleSubtitle" id="4YS-l8-BWc">
                                         <rect key="frame" x="0.0" y="130" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4YS-l8-BWc" id="0Fi-Hx-r0o">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="25" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TOT-r1-CSi">
@@ -272,7 +291,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kgk-TF-hvd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Calculator" image="calculate" selectedImage="calculate" id="6n6-Ra-Ur7"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jKd-9v-voT">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="jKd-9v-voT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -290,7 +310,7 @@
             <objects>
                 <tableViewController id="u3r-1f-q8X" customClass="CurrencyTableViewController" customModule="CurrencyConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="557-VK-9bZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -360,25 +380,25 @@
                         <viewControllerLayoutGuide type="bottom" id="5Ya-nJ-lac"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UNV-aU-WZl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="iPT-jU-w3M">
-                                <rect key="frame" x="20" y="104" width="374" height="238.66666666666669"/>
+                                <rect key="frame" x="20" y="40" width="374" height="238.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hx6-T9-xCq">
-                                        <rect key="frame" x="0.0" y="0.0" width="119.66666666666666" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="119.66666666666666" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter currency name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jzb-KK-pC5">
-                                        <rect key="frame" x="0.0" y="32.333333333333343" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="32.333333333333329" width="374" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ws-I2-krR">
-                                        <rect key="frame" x="0.0" y="74.333333333333343" width="61.333333333333329" height="20.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="74.333333333333343" width="61.333333333333329" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -451,7 +471,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g7D-WE-DNO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Currencies" image="currencies" selectedImage="currencies" id="ySt-Xf-iuX"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A4a-15-eqU">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="A4a-15-eqU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -462,14 +483,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhj-J0-wIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="805" y="434"/>
+            <point key="canvasLocation" x="741" y="451"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qnI-af-vPK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eK3-zj-bdm" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jzp-mt-gvp">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Jzp-mt-gvp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -487,7 +509,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ewr-MR-eL1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oqi-qm-koz">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="oqi-qm-koz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -505,7 +528,7 @@
             <objects>
                 <tableViewController title="Pick The Second Currency" id="eWS-9L-xjD" customClass="SecondSelectionTableViewController" customModule="CurrencyConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ggm-gL-tRc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -543,7 +566,7 @@
                             <outlet property="delegate" destination="eWS-9L-xjD" id="7RB-yK-r0s"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pick The Second Currency" id="Qpb-lK-lIc" userLabel="Pick The Second Currency">
+                    <navigationItem key="navigationItem" title="Second Currency" id="Qpb-lK-lIc" userLabel="Pick The Second Currency">
                         <barButtonItem key="leftBarButtonItem" title="&lt;Back" id="tef-Rv-qoT">
                             <connections>
                                 <action selector="back:" destination="eWS-9L-xjD" id="wCq-b1-Jn2"/>
@@ -565,7 +588,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zdj-Pm-6uJ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fB1-LY-0i8">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="fB1-LY-0i8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -583,5 +607,5 @@
         <image name="calculate" width="32" height="32"/>
         <image name="currencies" width="46" height="46"/>
     </resources>
-    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

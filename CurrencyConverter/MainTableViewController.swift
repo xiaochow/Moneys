@@ -42,7 +42,7 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
         }
         
         // Initialize the view when it is opened.
-        resultLabel.text = "= 0.0000"
+        resultLabel.text = "= 0.00"
         amountTextField.text = ""
      
         amountTextField.delegate = self
