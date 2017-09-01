@@ -209,7 +209,7 @@
                                         <rect key="frame" x="0.0" y="40" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ELa-jS-feS" id="oAz-ZB-vu9">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="20" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cWj-Kx-y5b">
@@ -240,7 +240,7 @@
                                         <rect key="frame" x="0.0" y="130" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4YS-l8-BWc" id="0Fi-Hx-r0o">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="25" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TOT-r1-CSi">

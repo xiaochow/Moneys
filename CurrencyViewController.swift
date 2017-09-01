@@ -61,7 +61,7 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate{
         let text1 = nameTextField.text ?? ""
         let text2 = countryTextField.text ?? ""
         let text3 = rateTextField.text ?? ""
-        saveButton.isEnabled = !text1.isEmpty || !text2.isEmpty || !text3.isEmpty || Double(text3) != 0
+        saveButton.isEnabled = !text1.isEmpty && !text2.isEmpty && !text3.isEmpty && Double(text3) != 0
     }
     
     // Call this function when the tap is recognized.
