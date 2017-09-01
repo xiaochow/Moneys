@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,20 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Dun-bu-KHC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="vDj-ke-FBR">
                                 <rect key="frame" x="82" y="168" width="250" height="400"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="AW4-Sw-dz8"/>
-                                    <constraint firstAttribute="width" constant="250" id="b03-rv-TeI"/>
+                                    <constraint firstAttribute="width" constant="250" id="1Vx-yY-X0l"/>
+                                    <constraint firstAttribute="height" constant="400" id="Ltm-Gr-f7E"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Dun-bu-KHC" secondAttribute="trailing" constant="62" id="9Z5-PV-Edg"/>
-                            <constraint firstItem="Dun-bu-KHC" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="148" id="Gmo-nU-e6c"/>
-                            <constraint firstItem="Dun-bu-KHC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="62" id="aeX-WE-1fb"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Dun-bu-KHC" secondAttribute="bottom" constant="168" id="v3R-1s-HNG"/>
+                            <constraint firstItem="vDj-ke-FBR" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="363-bH-BuB"/>
+                            <constraint firstItem="vDj-ke-FBR" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="l1l-CQ-lQA"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -45,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="125" height="200"/>
+        <image name="launchScreen" width="250" height="400"/>
     </resources>
 </document>
