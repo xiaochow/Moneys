@@ -1,4 +1,4 @@
-# Moneys
+# XMoneys
 
 An iOS concurrency converter app.
 
