@@ -33,12 +33,12 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Load currencies or sample currencies for the first time.
-        if let savedCurrecncies = loadCurrencies() {
-            
-            currencies = savedCurrecncies
+        if LocalStorage.shared.currencies.isEmpty {
+            loadSampleCurrencies()
+            LocalStorage.shared.currencies = self.currencies
         }
         else {
-            loadSampleCurrencies()
+            self.currencies = LocalStorage.shared.currencies
         }
         
         // Initialize the view when it is opened.
@@ -46,7 +46,6 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
         amountTextField.text = ""
      
         amountTextField.delegate = self
-        self.saveCurrencies()
         
         // Set up the two selected currencies
         settingUp()
@@ -56,13 +55,13 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
     // To load sample currencies.
     func loadSampleCurrencies(){
         
-        let c1 = Currency(name: "US Dollar", country: "The US", rate: 1.00)!
-        let c2 = Currency(name: "Chinese Yuan", country: "China", rate: 6.67)!
-        let c3 = Currency(name: "Euro", country: "Europe", rate: 0.89)!
-        let c4 = Currency(name: "Japanese Yen", country: "Japan", rate: 113.64)!
-        let c5 = Currency(name: "Canadian Dollar", country: "Canada", rate: 1.32)!
-        let c6 = Currency(name: "South Korean Won", country: "South Korea", rate: 1190.48)!
-        let c7 = Currency(name: "Brazilian Real", country: "Brazil", rate: 3.57)!
+        let c1 = Currency(name: "US Dollar", country: "The US", rate: 1.15)
+        let c2 = Currency(name: "Chinese Yuan", country: "China", rate: 7.99)
+        let c3 = Currency(name: "Euro", country: "Europe", rate: 1.00)
+        let c4 = Currency(name: "Japanese Yen", country: "Japan", rate: 129.78)
+        let c5 = Currency(name: "Canadian Dollar", country: "Canada", rate: 1.32)
+        let c6 = Currency(name: "South Korean Won", country: "South Korea", rate: 1305.39)
+        let c7 = Currency(name: "Brazilian Real", country: "Brazil", rate: 4.28)
         
         currencies += [c1, c2, c3, c4, c5, c6, c7]
 
@@ -117,7 +116,7 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     // Calls this function when the tap is recognized.
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         
         // Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -146,7 +145,7 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func unwindToMainTable(_ sender: UIStoryboardSegue) {
         
         // Update the latest version of currencies.
-        currencies = loadCurrencies()!
+        currencies = LocalStorage.shared.currencies
         
         // Get the selection value from one of two senders.
         if let sourceViewController = sender.source as? SelectionTableViewController {
@@ -156,7 +155,7 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
                 Currency.secondSelection = SourceViewController.second
         }
         
-        saveCurrencies()
+        LocalStorage.shared.currencies = self.currencies
         
         // Refresh the view.
         settingUp()
@@ -171,7 +170,7 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
         Currency.secondSelection = x
         
         settingUp()
-        saveCurrencies()
+        LocalStorage.shared.currencies = self.currencies
         textFieldDidEndEditing(amountTextField)
     }
     
@@ -182,18 +181,4 @@ class MainTableViewController: UITableViewController, UITextFieldDelegate {
         amountTextField.text = ""
         
     }
-    
-    // MARK: NSCoding
-    
-    func saveCurrencies() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(currencies, toFile: Currency.ArchiveURL.path)
-        if !isSuccessfulSave {
-            print("Failed to save currencies...")
-        }
-    }
-    
-    func loadCurrencies() -> [Currency]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Currency.ArchiveURL.path) as? [Currency]
-    }
-
 }

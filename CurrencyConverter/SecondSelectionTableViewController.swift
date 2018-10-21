@@ -22,8 +22,7 @@ class SecondSelectionTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Load currencies.
-        let savedCurrecncies = loadCurrencies()!
-        currencies = savedCurrecncies
+        currencies = LocalStorage.shared.currencies
         
         // When the selected currency is deleted.
         if Currency.secondSelection >= currencies.count {
@@ -56,10 +55,10 @@ class SecondSelectionTableViewController: UITableViewController {
         
         // Configure the checkmark.
         if Currency.secondSelection == indexPath.row {
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         }
         else {
-            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         return cell
         
@@ -75,19 +74,7 @@ class SecondSelectionTableViewController: UITableViewController {
 
     //  This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let button = sender as! UIBarButtonItem! {
-            if self.backButton == button {
-                second = Currency.secondSelection
-            }
-        }
+        LocalStorage.shared.currencies = self.currencies
     }
-    
-    // MARK: - Navigation
-    
-    func loadCurrencies() -> [Currency]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Currency.ArchiveURL.path) as? [Currency]
-    }
-    
     
 }

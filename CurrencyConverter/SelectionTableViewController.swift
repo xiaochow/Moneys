@@ -18,12 +18,12 @@ class SelectionTableViewController: UITableViewController {
     
     @IBOutlet weak var backButton: UIBarButtonItem!
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.currencies = LocalStorage.shared.currencies
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load currencies.
-        let savedCurrecncies = loadCurrencies()!
-        currencies = savedCurrecncies
         
         //  When the selection was deleted in the list.
         if Currency.firstSelection >= currencies.count {
@@ -54,10 +54,10 @@ class SelectionTableViewController: UITableViewController {
         
         //  Configure the checkmark.
         if Currency.firstSelection == indexPath.row {
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         }
         else {
-            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         return cell
 
@@ -73,19 +73,7 @@ class SelectionTableViewController: UITableViewController {
     
     //  This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let button = sender as! UIBarButtonItem! {
-            if self.backButton == button {
-                first = Currency.firstSelection
-            }
-        }
-
+        LocalStorage.shared.currencies = self.currencies
     }
-    
-    // MARK: NSCoding
-    
-    func loadCurrencies() -> [Currency]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Currency.ArchiveURL.path) as? [Currency]
-    }
-
 
 }

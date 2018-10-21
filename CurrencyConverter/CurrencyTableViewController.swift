@@ -14,12 +14,14 @@ class CurrencyTableViewController: UITableViewController {
     var currencies = [Currency]()
     var refresher: UIRefreshControl!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.currencies = LocalStorage.shared.currencies
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Load currencies.
-        let savedCurrecncies = loadCurrencies()!
-        currencies = savedCurrecncies
 
         // Activate the edit button provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
@@ -28,14 +30,14 @@ class CurrencyTableViewController: UITableViewController {
         self.refresher = UIRefreshControl()
         self.tableView.addSubview(refresher)
         self.refresher.tintColor = UIColor.black
-        let attributes = [NSForegroundColorAttributeName : UIColor.black] as [String: Any]
-        self.refresher.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: attributes)
+        let attributes = [convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.black] as [String: Any]
+        self.refresher.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: convertToOptionalNSAttributedStringKeyDictionary(attributes))
         self.refresher.addTarget(self, action: #selector(fetchOnlineData), for: .valueChanged)
     }
     
-    func fetchOnlineData() {
+    @objc func fetchOnlineData() {
         
-        let url = NSURL(string:"http://api.fixer.io/latest?base=USD")!
+        let url = NSURL(string:"http://data.fixer.io/api/latest?access_key=f562bf02cb52780c2c26a7f3fdc326e7&symbols=CNY,USD,CAD,JPY,KRW,BRL&format=1")!
         let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {(data, response, error) in
             
             if let sourceData = data {
@@ -47,17 +49,17 @@ class CurrencyTableViewController: UITableViewController {
                     let rates = json["rates"]!
                     
                     self.currencies[1].rate = rates["CNY"] as! Double
-                    self.currencies[2].rate = rates["EUR"] as! Double
+                    self.currencies[0].rate = rates["USD"] as! Double
                     self.currencies[3].rate = rates["JPY"] as! Double
                     self.currencies[4].rate = rates["CAD"] as! Double
                     self.currencies[5].rate = rates["KRW"] as! Double
                     self.currencies[6].rate = rates["BRL"] as! Double
                     
-                    self.saveCurrencies()
+                    LocalStorage.shared.currencies = self.currencies
                 }
             }
             else {
-               // No Internet connection alert.
+               print("Unable to load rates from the web.")
             }
         })
                 
@@ -120,47 +122,28 @@ class CurrencyTableViewController: UITableViewController {
     
 
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         // Only delete operation is allowed.
         if editingStyle == .delete {
             
             // Delete the row from the data source
-            currencies.remove(at: indexPath.row)
+            self.currencies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
-        saveCurrencies()
+        LocalStorage.shared.currencies = self.currencies
     }
+    
+}
 
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
 
-    // Function connected to the segue.
-    @IBAction func unwindToCurrencyList(_ sender: UIStoryboardSegue) {
-        
-        if let sourceViewController = sender.source as? CurrencyViewController, let currency = sourceViewController.currency {
-            
-            // Add a new currency.
-            let newIndexPath = IndexPath(row: currencies.count, section: 0)
-            currencies.append(currency)
-            tableView.insertRows(at: [newIndexPath], with: .bottom)
-            
-        }
-        
-        saveCurrencies()
-    }
-    
-    
-    // MARK: NSCoding
-    func saveCurrencies() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(currencies, toFile: Currency.ArchiveURL.path)
-        if !isSuccessfulSave {
-            print("Failed to save currencies...")
-        }
-    }
-    
-    func loadCurrencies() -> [Currency]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Currency.ArchiveURL.path) as? [Currency]
-    }
-    
-    
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

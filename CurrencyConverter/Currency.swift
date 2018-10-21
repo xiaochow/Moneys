@@ -8,70 +8,48 @@
 
 import UIKit
 
-class Currency: NSObject, NSCoding{
+struct Currency: Codable{
     
     //  MARK: Properties
     
-    var name: String
-    var country: String
-    var rate: Double
+    var name: String = ""
+    var country: String = ""
+    var rate: Double = 0
     
     //  To store the index of selected currencies.
     static var firstSelection: Int = 0
     static var secondSelection: Int = 1
-    
-    //  MARK: Archiving Paths
-    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("currencies")
-    
-    //  MARK: Types
-    struct PropertyKey {
-        
-        static let nameKey = "name"
-        static let countryKey = "country"
-        static let rateKey = "rate"
-        static let firstSelectionKey = "firstSelection"
-        static let secondSelectionKey = "secondSelection"
+}
 
-    }
+public let userDefaults = UserDefaults.init(suiteName: "group.com.Xiaoxw.CurrencyConverter")!
 
-    //  MARK: Initialization
-    init?(name: String, country: String, rate: Double) {
-        
-        self.name = name
-        self.rate = rate
-        self.country = country
-        
-        super.init()
-        
-        // Return nil if information is invalid.
-        if name.isEmpty || rate < 0 || country.isEmpty {
-            return nil
+class LocalStorage {
+    static let shared = LocalStorage()
+    
+    var currencies: [Currency] {
+        get{
+            do {
+                if let dataString = userDefaults.string(forKey: "Currencies") {
+                    if let currencyJSON = dataString.data(using: .utf8) {
+                        let currencies = try JSONDecoder().decode([Currency].self, from: currencyJSON)
+                        return currencies
+                    }
+                }
+            }
+            catch {
+                print("Unable to get currencies object.")
+            }
+            return [Currency]()
+        }
+        set(currencies) {
+            do {
+                let currencyJSON = try JSONEncoder().encode(currencies)
+                let dataString = String(data: currencyJSON, encoding: .utf8)
+                userDefaults.set(dataString, forKey: "Currencies")
+            }
+            catch {
+                print("Unable to set currencies object.")
+            }
         }
     }
-    
-    //  MARK: NSCoding
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: PropertyKey.nameKey)
-        aCoder.encode(country, forKey: PropertyKey.countryKey)
-        aCoder.encode(rate, forKey: PropertyKey.rateKey)
-        aCoder.encode(Currency.firstSelection, forKey: PropertyKey.firstSelectionKey)
-        aCoder.encode(Currency.secondSelection, forKey: PropertyKey.secondSelectionKey)
-
-    }
-    
-    //  NSCoding initiaition.
-    required convenience init?(coder aDecoder: NSCoder) {
-        
-        let name = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as! String
-        let country = aDecoder.decodeObject(forKey: PropertyKey.countryKey) as! String
-        let rate = aDecoder.decodeDouble(forKey: PropertyKey.rateKey)
-        
-        Currency.firstSelection = aDecoder.decodeInteger(forKey: PropertyKey.firstSelectionKey)
-        Currency.secondSelection = aDecoder.decodeInteger(forKey: PropertyKey.secondSelectionKey)
-        
-        self.init(name: name, country: country, rate: rate)
-        
-    }
-    
 }

@@ -49,12 +49,6 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate{
         checkValidInput()
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-       
-        //  Disable the Save button while editing.
-        saveButton.isEnabled = false
-    }
-    
     // Check if the input information is valid.
     func checkValidInput() {
         
@@ -65,7 +59,7 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate{
     }
     
     // Call this function when the tap is recognized.
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
 
         // Cause the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -80,22 +74,16 @@ class CurrencyViewController: UIViewController, UITextFieldDelegate{
         
     }
     
-    // This method lets you configure a view controller before it's presented.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let button = sender as! UIBarButtonItem! {
-            if saveButton === button {
-                let name = nameTextField.text ?? ""
-                let country = countryTextField.text ?? ""
-                let rateString = rateTextField.text ?? ""
-                let rate = Double(rateString) ?? 1.00
-                
-                // Set the currency to be passed to CurrencyTableViewController after the unwind segue.
-                currency = Currency(name: name, country: country, rate: rate)
-                
-            }
-        }
-    }
-
-
     
+    @IBAction func save(_ sender: UIBarButtonItem) {
+        
+        let name = nameTextField.text ?? ""
+        let country = countryTextField.text ?? ""
+        let rateString = rateTextField.text ?? ""
+        let rate = Double(rateString) ?? 1.00
+        let currency = Currency(name: name, country: country, rate: rate)
+        
+        LocalStorage.shared.currencies.append(currency)
+        
+    }
 }
